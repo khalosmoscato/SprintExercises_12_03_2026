@@ -6,16 +6,34 @@ using System.Text;
 
 namespace SprintExercise_12_03_2026
 {
-    class Pikachu
+    // testing virtual
+    class Pokemon // this is the `Base` (Parent)
     {
-        public static string Cry = "Pika-pi";
-        public string Genre {  get; set; }
-        public Pikachu(string genre)
+        public string Name { get; set; }
+        public virtual bool IsShiny()
         {
-            Genre = genre;
+            return false;
         }
     }
 
+    class Pikachu : Pokemon // this is a `Derived` (Child) (same could be applied to Eevee)
+    {
+        public Pikachu() { Name = "Pikachu"; }
+        // Pikachu has 2 fields, `Cry` is defaulted and the `Genre` is requested in the contructor
+        public static string Cry = "Pika-pi";
+        public string Genre {  get; set; }
+        public override bool IsShiny()
+        {
+            // return base.IsShiny();
+            return true;
+        }
+        public Pikachu(string genre) : this() // because I separated the Name constructor with this Genre construct, and I can link them by using `this()`, technique called `Contructor Chaining`
+        {
+            Genre = genre;
+        }
+    
+    }
+    
     class Eevee
     {
         // if I set a field to static, all the new eevees created using this class will inherit this field by default.
