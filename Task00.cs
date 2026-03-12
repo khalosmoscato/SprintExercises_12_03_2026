@@ -86,6 +86,24 @@ namespace SprintExercise_12_03_2026
             // return false;
             // }
             //```
+            // it is golden rule in c# that if I override `Equals()`, I should override `GetHashCode()` too
+            // This ensures that if two objects are "Equal" (same Genre), the system gives them the same "Digital Fingerprint" (HashCode).
+            // following the example above, I would then add to `Pikachu` class the following:
+            //```csharp
+            // public override GetHashCode()
+            // {
+            //     return Genre?.GetHasCode() ?? 0;
+            // }
+            //```
+            // above, the `?.` is the `Null-Conditional Operator` -> it basically says if Genre exists, give me its hash code, if not, handles the null and prevent the program from crashing
+            // although we cannot assing `null` to `GetHashCode()` which returns an `int`, so we concatenate this line at the end with:
+            // `??` the `Null-Coalescing Operator` -> this says if the code before returnes null, assign a default value (int 0 in our case) to `GetHashCode()`
+            // PS: for Strings/Objects: You use ?. and ?? because they can be null; for Integers/Booleans: You just return the value directly.
+            // Instead of manually checking each property with `?.` and `??`, I can use "combine" machine, and it does the same: spits out a single, unique integer.
+            // so you would replace `return Genre?.GetHasCode() ?? 0;` with `return HashCode.Combine(Genre);`
+            // inside `Combine()` parantheses you mirror what you are returning in the `Equals()`, in our case is `Genre` only, could be more aruments, just mirror what the `Equals()` returns
+
+
 
             // trying `GetHashCode()`
             Console.WriteLine(pika1.GetHashCode());
