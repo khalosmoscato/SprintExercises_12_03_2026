@@ -50,6 +50,40 @@ class Program
             }
         }
         result = num1 / (double)num2;
-        Console.WriteLine(result);
+        // Console.WriteLine(result);
+        // converting resunt into a char[] as per exercise:
+        while(true)
+        {
+            Console.WriteLine("Would you like the answer as an `char` array?");
+            Console.WriteLine("Type in the word: 'true' or 'false'");
+            // check if user input is valid and `out` the result of that TryParse as `isChar`
+            bool input3 = bool.TryParse(Console.ReadLine(), out bool isChar);
+            // if our input3 parse worked, which means it is true, we now have to check what value is in `isChar`
+            if (input3)
+            {
+                // if `isChar` is actually == true
+                if (isChar)
+                {
+                    // create a char[] and put the result into it, double -> stringify -> make char[]
+                    char[] charResult = result.ToString().ToCharArray();
+                    // we can do a foreach statement to print each char in the char[] on its own line, this is not necessary
+                    foreach (char c in charResult)
+                    {
+                        Console.WriteLine(c);
+                    }
+                }
+                // if `isChar` was a false, we just print the result as a double
+                else
+                {
+                    Console.WriteLine(result);
+                }
+                break;
+            }
+            // this else is if `input3` does not pass the TryParse, in that case we tell the user their input was invalid, and restart the while loop
+            else
+            {
+                Console.WriteLine("Invalid input, please try again.");
+            }
+        }
     }
 }
